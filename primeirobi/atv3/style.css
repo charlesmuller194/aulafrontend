@@ -1,0 +1,163 @@
+/* Reset: garante que padding e border sejam incluídos na largura total do elemento */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Corpo da página com cor de fundo suave */
+body {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background-color: #f0f4f8;
+    color: #333333;
+    line-height: 1.7;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #1a3a5c;
+    color: #ffffff;
+    padding: 20px 40px;
+}
+
+header h1 {
+    margin: 0 0 12px 0;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+}
+
+/* Navegação: remove marcadores da lista */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 24px;
+}
+
+/* Links do menu: sem sublinhado, cor branca */
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.95rem;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-bottom-color 0.2s;
+}
+
+/* Efeito hover nos links do menu */
+nav a:hover {
+    color: #7ecfff;
+    border-bottom-color: #7ecfff;
+}
+
+/* Área de conteúdo principal */
+main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Card do artigo: centralizado, com borda, espaçamento e sombra suave */
+article {
+    background-color: #ffffff;
+    border: 1px solid #d0d7e0;
+    border-radius: 8px;
+    padding: 36px 48px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Título do post: maior e com cor diferente dos parágrafos */
+article h2 {
+    font-size: 2rem;
+    color: #1a3a5c;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+/* Data do post */
+article time {
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.85rem;
+    color: #888888;
+    margin-bottom: 24px;
+}
+
+/* Parágrafos */
+article p {
+    font-size: 1rem;
+    color: #444444;
+    margin-bottom: 16px;
+}
+
+/* Imagem responsiva dentro do artigo */
+article figure {
+    margin: 24px 0 0 0;
+}
+
+article figure img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    display: block;
+}
+
+article figcaption {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.82rem;
+    color: #888888;
+    text-align: center;
+    margin-top: 8px;
+}
+
+/* Barra lateral */
+aside {
+    background-color: #ffffff;
+    border: 1px solid #d0d7e0;
+    border-radius: 8px;
+    padding: 24px 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+aside h3 {
+    font-size: 1.1rem;
+    color: #1a3a5c;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+aside ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+aside li {
+    margin-bottom: 10px;
+}
+
+aside a {
+    color: #2a6496;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+aside a:hover {
+    color: #1a3a5c;
+    text-decoration: underline;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.82rem;
+    color: #888888;
+    border-top: 1px solid #d0d7e0;
+    margin-top: 40px;
+}
