@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exercício 04 — Refatoração Semântica</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f9;
+      color: #333;
+      padding: 2rem;
+    }
+
+    .comparativo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .bloco {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    .bloco h2 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid;
+    }
+
+    .bloco.antes h2 { color: #e74c3c; border-color: #e74c3c; }
+    .bloco.depois h2 { color: #27ae60; border-color: #27ae60; }
+
+    pre {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      border-radius: 6px;
+      padding: 1.2rem;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .antes pre { border-left: 4px solid #e74c3c; }
+    .depois pre { border-left: 4px solid #27ae60; }
+
+    /* Syntax highlight simples */
+    .tag    { color: #89dceb; }
+    .attr   { color: #f38ba8; }
+    .val    { color: #a6e3a1; }
+    .text   { color: #cdd6f4; }
+    .comment{ color: #6c7086; font-style: italic; }
+
+    h1.titulo-pagina {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+      color: #2d3436;
+    }
+
+    /* ─── RESULTADO RENDERIZADO ─────────────────── */
+    .resultado {
+      max-width: 1100px;
+      margin: 2.5rem auto 0;
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    .resultado h2 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #27ae60;
+      border-bottom: 2px solid #27ae60;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Estilos do resultado semântico */
+    .resultado header {
+      background: #2d3436;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .resultado nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .resultado nav ul li a {
+      color: #dfe6e9;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .resultado nav ul li a:hover {
+      color: #27ae60;
+    }
+
+    .resultado main {
+      background: #f8f9fa;
+      border-radius: 6px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .resultado main article {
+      background: #fff;
+      border-radius: 6px;
+      padding: 1rem;
+      border-left: 3px solid #27ae60;
+    }
+
+    .resultado main article h1 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .resultado footer {
+      background: #2d3436;
+      color: #dfe6e9;
+      text-align: center;
+      padding: 0.8rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="titulo-pagina">Exercício 04 — Antes vs. Depois: HTML Semântico</h1>
+
+  <div class="comparativo">
+
+    <!-- ═══ ANTES (código original não semântico) ═══ -->
+    <div class="bloco antes">
+      <h2>❌ Antes — não semântico</h2>
+      <pre><span class="comment">&lt;!-- Navegação usando divs e spans --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">id</span>=<span class="val">"x1"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"a b c"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;span&gt;</span>
+      <span class="tag">&lt;span&gt;</span>
+        <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span> <span class="attr">class</span>=<span class="val">"l1"</span><span class="tag">&gt;</span>Home<span class="tag">&lt;/a&gt;</span>
+      <span class="tag">&lt;/span&gt;</span>
+    <span class="tag">&lt;/span&gt;</span>
+    <span class="tag">&lt;span&gt;</span>
+      <span class="tag">&lt;span&gt;</span>
+        <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span> <span class="attr">class</span>=<span class="val">"l2"</span><span class="tag">&gt;</span>Serviços<span class="tag">&lt;/a&gt;</span>
+      <span class="tag">&lt;/span&gt;</span>
+    <span class="tag">&lt;/span&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="comment">&lt;!-- Conteúdo usando divs aninhadas desnecessariamente --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">id</span>=<span class="val">"x2"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"wrapper"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"box"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"post"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"inner"</span><span class="tag">&gt;</span>
+          <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;h1</span> <span class="attr">class</span>=<span class="val">"t t1"</span><span class="tag">&gt;</span>Título<span class="tag">&lt;/h1&gt;</span>
+          <span class="tag">&lt;/div&gt;</span>
+          <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="val">"txt"</span><span class="tag">&gt;</span>Texto do post<span class="tag">&lt;/p&gt;</span>
+          <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+      <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="comment">&lt;!-- Rodapé usando divs e span em volta de parágrafo --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">id</span>=<span class="val">"x3"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"f1 f2"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div&gt;</span>
+      <span class="tag">&lt;span&gt;</span>
+        <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="val">"r"</span><span class="tag">&gt;</span>Roda vrum vrum<span class="tag">&lt;/p&gt;</span>
+      <span class="tag">&lt;/span&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+    </div>
+
+    <!-- ═══ DEPOIS (código refatorado, semântico) ═══ -->
+    <div class="bloco depois">
+      <h2>✅ Depois — semântico e limpo</h2>
+      <pre><span class="comment">&lt;!-- Navegação: header + nav + lista de links --&gt;</span>
+<span class="tag">&lt;header&gt;</span>
+  <span class="tag">&lt;nav</span> <span class="attr">aria-label</span>=<span class="val">"Menu principal"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;ul&gt;</span>
+      <span class="tag">&lt;li&gt;&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span><span class="tag">&gt;</span>Home<span class="tag">&lt;/a&gt;&lt;/li&gt;</span>
+      <span class="tag">&lt;li&gt;&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span><span class="tag">&gt;</span>Serviços<span class="tag">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="tag">&lt;/ul&gt;</span>
+  <span class="tag">&lt;/nav&gt;</span>
+<span class="tag">&lt;/header&gt;</span>
+
+<span class="comment">&lt;!-- Conteúdo principal: main + article --&gt;</span>
+<span class="tag">&lt;main&gt;</span>
+  <span class="tag">&lt;article&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>Título<span class="tag">&lt;/h1&gt;</span>
+    <span class="tag">&lt;p&gt;</span>Texto do post<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;/article&gt;</span>
+<span class="tag">&lt;/main&gt;</span>
+
+<span class="comment">&lt;!-- Rodapé: footer com p direto, sem wrappers --&gt;</span>
+<span class="tag">&lt;footer&gt;</span>
+  <span class="tag">&lt;p&gt;</span>Roda vrum vrum<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/footer&gt;</span></pre>
+    </div>
+
+  </div>
+
+  <!-- ═══ RESULTADO RENDERIZADO DO CÓDIGO SEMÂNTICO ═══ -->
+  <div class="resultado">
+    <h2>✅ Resultado renderizado — código semântico</h2>
+
+    <header>
+      <nav aria-label="Menu principal">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Serviços</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <article>
+        <h1>Título</h1>
+        <p>Texto do post</p>
+      </article>
+    </main>
+
+    <footer>
+      <p>Roda vrum vrum</p>
+    </footer>
+
+  </div>
+
+  <!--
+  ═══════════════════════════════════════════════════════
+   ANOTAÇÕES — O QUE FOI CORRIGIDO
+  ═══════════════════════════════════════════════════════
+
+  1. div#x1 → <header> + <nav> + <ul>/<li>
+     • O bloco de navegação pertence ao cabeçalho da página.
+     • <nav> comunica aos leitores de tela que é um menu.
+     • Links de navegação devem ser envolvidos em lista (<ul>/<li>),
+       não em <span> (elemento inline, sem significado semântico).
+
+  2. div#x2 → <main> + <article>
+     • Todo o empilhamento de divs (.wrapper > .box > .post > .inner)
+       não acrescenta nenhum significado — foi removido.
+     • <main> delimita o conteúdo central da página.
+     • <article> indica um bloco de conteúdo independente (post).
+     • <h1> e <p> ficam diretamente dentro do <article>, sem divs extras.
+
+  3. div#x3 → <footer>
+     • Era claramente o rodapé da página (rodapé = "roda").
+     • <span> não pode envolver <p> (inline não pode conter bloco).
+       Isso é um erro de HTML inválido — foi removido.
+     • <p> fica diretamente dentro de <footer>.
+
+  ═══════════════════════════════════════════════════════
+  -->
+
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InfoPulse — Portal de Notícias</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #eaeef3;
+      color: #222;
+    }
+
+    /* ─── HEADER ─────────────────────────────────── */
+    header.portal-header {
+      background: #c0392b;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 2rem;
+    }
+
+    header.portal-header h1 {
+      font-size: 1.7rem;
+      letter-spacing: 1px;
+    }
+
+    header.portal-header h1 span {
+      font-weight: 300;
+      color: #ffcdd2;
+    }
+
+    header.portal-header p.data {
+      font-size: 0.8rem;
+      color: #ffcdd2;
+    }
+
+    /* ─── NAV DE CATEGORIAS ─────────────────────── */
+    nav.categorias {
+      background: #222;
+    }
+
+    nav.categorias ul {
+      list-style: none;
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    nav.categorias ul li a {
+      display: block;
+      color: #ccc;
+      text-decoration: none;
+      padding: 0.75rem 1.3rem;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    nav.categorias ul li a:hover,
+    nav.categorias ul li a.ativo {
+      background: #c0392b;
+      color: #fff;
+    }
+
+    /* ─── LAYOUT PRINCIPAL ──────────────────────── */
+    .portal-body {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      grid-template-rows: auto auto;
+      gap: 1.2rem;
+      max-width: 1200px;
+      margin: 1.5rem auto;
+      padding: 0 1.2rem;
+    }
+
+    /* ─── DESTAQUE ──────────────────────────────── */
+    .destaque {
+      grid-column: 1 / 2;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .destaque .destaque-img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      background: linear-gradient(135deg, #2c3e50, #4ca1af);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 5rem;
+    }
+
+    .destaque .destaque-corpo {
+      padding: 1.5rem;
+    }
+
+    .destaque .badge {
+      display: inline-block;
+      background: #c0392b;
+      color: #fff;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      margin-bottom: 0.6rem;
+    }
+
+    .destaque h2 {
+      font-size: 1.6rem;
+      line-height: 1.3;
+      color: #1a1a1a;
+      margin-bottom: 0.7rem;
+    }
+
+    .destaque p {
+      color: #555;
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .destaque .meta {
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      color: #999;
+    }
+
+    /* ─── SIDEBAR ───────────────────────────────── */
+    aside.sidebar {
+      grid-column: 2 / 3;
+      grid-row: 1 / 3;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .sidebar-box {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    .sidebar-box h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #c0392b;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .sidebar-box ul {
+      list-style: none;
+    }
+
+    .sidebar-box ul li {
+      padding: 0.45rem 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 0.88rem;
+      color: #444;
+    }
+
+    .sidebar-box ul li:last-child {
+      border-bottom: none;
+    }
+
+    .sidebar-box ul li a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    .sidebar-box ul li a:hover {
+      color: #c0392b;
+    }
+
+    /* ─── GRADE DE NOTÍCIAS SECUNDÁRIAS ─────────── */
+    .secundarias {
+      grid-column: 1 / 2;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    article.card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      display: flex;
+      flex-direction: column;
+    }
+
+    article.card .card-icon {
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    article.card:nth-child(1) .card-icon { background: #fdecea; }
+    article.card:nth-child(2) .card-icon { background: #e8f5e9; }
+    article.card:nth-child(3) .card-icon { background: #e3f2fd; }
+
+    article.card .card-corpo {
+      padding: 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    article.card .badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      margin-bottom: 0.5rem;
+      width: fit-content;
+    }
+
+    .badge-politica   { background: #fdecea; color: #c0392b; }
+    .badge-esporte    { background: #e8f5e9; color: #27ae60; }
+    .badge-tecnologia { background: #e3f2fd; color: #2980b9; }
+
+    article.card h3 {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      color: #1a1a1a;
+      margin-bottom: 0.4rem;
+    }
+
+    article.card p {
+      font-size: 0.82rem;
+      color: #666;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    article.card .meta {
+      font-size: 0.75rem;
+      color: #aaa;
+      margin-top: 0.7rem;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────── */
+    footer {
+      background: #1a1a1a;
+      color: #aaa;
+      text-align: center;
+      padding: 1.2rem;
+      font-size: 0.82rem;
+      margin-top: 2rem;
+    }
+
+    footer a {
+      color: #c0392b;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CABEÇALHO DO PORTAL -->
+  <header class="portal-header">
+    <h1>Info<span>Pulse</span></h1>
+    <p class="data">Quinta-feira, 2 de abril de 2026</p>
+  </header>
+
+  <!-- MENU DE CATEGORIAS -->
+  <nav class="categorias" aria-label="Categorias de notícias">
+    <ul>
+      <li><a href="#" class="ativo">Todas</a></li>
+      <li><a href="#">Política</a></li>
+      <li><a href="#">Esporte</a></li>
+      <li><a href="#">Tecnologia</a></li>
+      <li><a href="#">Saúde</a></li>
+      <li><a href="#">Mundo</a></li>
+    </ul>
+  </nav>
+
+  <!-- CORPO DO PORTAL -->
+  <div class="portal-body">
+
+    <!-- NOTÍCIA EM DESTAQUE -->
+    <article class="destaque">
+      <div class="destaque-img" role="img" aria-label="Imagem da notícia em destaque">🌐</div>
+      <div class="destaque-corpo">
+        <span class="badge">Tecnologia · Destaque</span>
+        <h2>União Europeia aprova regulamentação histórica sobre uso de IA em serviços públicos</h2>
+        <p>
+          O Parlamento Europeu aprovou nesta terça-feira, por ampla maioria, um conjunto de normas
+          que obriga governos e empresas a tornarem transparentes os algoritmos utilizados em
+          decisões que afetam cidadãos — como concessão de benefícios sociais, análise de crédito
+          e processos seletivos. A legislação entra em vigor em janeiro de 2027 e é considerada
+          a mais abrangente do gênero no mundo.
+        </p>
+        <p class="meta">Por <strong>Sofia Matos</strong> &mdash; <time datetime="2026-04-02T09:15">2 abr. 2026, 09h15</time></p>
+      </div>
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="sidebar-box">
+        <h3>Mais lidas hoje</h3>
+        <ul>
+          <li><a href="#">Bolsa sobe 1,8% após dados do emprego</a></li>
+          <li><a href="#">Brasil classifica para as semifinais da Copa</a></li>
+          <li><a href="#">Nova vacina contra dengue aprovada pela Anvisa</a></li>
+          <li><a href="#">Startup brasileira capta R$ 400 mi em rodada</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-box">
+        <h3>Enquete</h3>
+        <p style="font-size:0.88rem; color:#555; margin-bottom:0.6rem;">
+          Você apoia a regulamentação de IA no Brasil?
+        </p>
+        <ul>
+          <li>✅ Sim, é urgente — <strong>64%</strong></li>
+          <li>⚠️ Depende da forma — <strong>25%</strong></li>
+          <li>❌ Não é necessário — <strong>11%</strong></li>
+        </ul>
+      </div>
+
+    </aside>
+
+    <!-- NOTÍCIAS SECUNDÁRIAS -->
+    <section class="secundarias">
+
+      <article class="card">
+        <div class="card-icon">⚖️</div>
+        <div class="card-corpo">
+          <span class="badge badge-politica">Política</span>
+          <h3>Senado vota projeto de reforma tributária nesta semana</h3>
+          <p>Texto prevê simplificação de impostos e pode impactar setor de serviços.</p>
+          <p class="meta"><time datetime="2026-04-02T08:00">2 abr. 2026, 08h00</time></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">⚽</div>
+        <div class="card-corpo">
+          <span class="badge badge-esporte">Esporte</span>
+          <h3>Seleção Brasileira goleia por 3 a 0 e lidera o grupo na Copa América</h3>
+          <p>Atacante marcou dois gols e foi eleito o melhor em campo na partida.</p>
+          <p class="meta"><time datetime="2026-04-01T23:45">1 abr. 2026, 23h45</time></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">🚀</div>
+        <div class="card-corpo">
+          <span class="badge badge-tecnologia">Tecnologia</span>
+          <h3>Empresa lança notebook com bateria de 72 horas de duração</h3>
+          <p>Tecnologia de célula de hidrogênio promete revolucionar o mercado de laptops.</p>
+          <p class="meta"><time datetime="2026-04-02T07:30">2 abr. 2026, 07h30</time></p>
+        </div>
+      </article>
+
+    </section>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 InfoPulse. Todos os direitos reservados. | <a href="#">Política de Privacidade</a> | <a href="#">Fale Conosco</a></p>
+  </footer>
+
+</body>
+</html>

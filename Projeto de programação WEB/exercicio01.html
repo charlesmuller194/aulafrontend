@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechVision — Site Institucional</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+    }
+
+    /* HEADER */
+    header {
+      background-color: #1a1a2e;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      letter-spacing: 1px;
+    }
+
+    header h1 span {
+      color: #e94560;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav ul li a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    nav ul li a:hover {
+      color: #e94560;
+    }
+
+    /* LAYOUT */
+    .container {
+      display: flex;
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      background: #fff;
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    main h2 {
+      font-size: 1.8rem;
+      color: #1a1a2e;
+      margin-bottom: 1rem;
+    }
+
+    main p {
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      color: #555;
+    }
+
+    /* ASIDE */
+    aside {
+      width: 260px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      align-self: flex-start;
+    }
+
+    aside h3 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #1a1a2e;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #e94560;
+      padding-bottom: 0.4rem;
+    }
+
+    aside ul {
+      list-style: none;
+    }
+
+    aside ul li {
+      padding: 0.45rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    aside ul li a {
+      color: #e94560;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    aside ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: #1a1a2e;
+      color: #aaa;
+      text-align: center;
+      padding: 1.2rem;
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: #e94560;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Tech<span>Vision</span></h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Sobre</a></li>
+        <li><a href="#">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <main>
+      <section>
+        <h2>Soluções tecnológicas para o seu negócio</h2>
+        <p>
+          A TechVision é uma empresa especializada em desenvolvimento de software, transformação
+          digital e consultoria em TI. Com mais de 10 anos de mercado, já ajudamos centenas de
+          empresas a modernizar seus processos e alcançar novos patamares de eficiência.
+        </p>
+        <p>
+          Nossa equipe é formada por profissionais apaixonados por tecnologia e comprometidos
+          em entregar projetos de alta qualidade dentro do prazo e do orçamento acordados.
+          Acreditamos que a inovação começa com as pessoas — por isso investimos constantemente
+          no desenvolvimento dos nossos colaboradores e na satisfação dos nossos clientes.
+        </p>
+      </section>
+    </main>
+
+    <aside>
+      <h3>Links Úteis</h3>
+      <ul>
+        <li><a href="#">Portfólio de Projetos</a></li>
+        <li><a href="#">Cases de Sucesso</a></li>
+        <li><a href="#">Blog Corporativo</a></li>
+        <li><a href="#">Trabalhe Conosco</a></li>
+        <li><a href="#">Política de Privacidade</a></li>
+        <li><a href="#">Suporte Técnico</a></li>
+      </ul>
+    </aside>
+
+  </div>
+
+  <footer>
+    <p>
+      Contato: <a href="mailto:contato@techvision.com.br">contato@techvision.com.br</a> |
+      Tel: (11) 99999-0000
+    </p>
+    <p>&copy; 2026 TechVision. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>
