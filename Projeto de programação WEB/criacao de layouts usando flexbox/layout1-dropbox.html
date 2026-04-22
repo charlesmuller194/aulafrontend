@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Layout 1 – Dropbox</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+
+    /* ── HEADER ─────────────────────────────────────────────── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      padding: 0 32px;
+      background-color: #ffffff;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 140px;
+      height: 40px;
+      background-color: #c8e6ff;
+      border: 2px solid #0061fe;
+      border-radius: 4px;
+      padding: 0 12px;
+      font-weight: bold;
+      color: #0061fe;
+    }
+
+    .header-logo .logo-icon {
+      width: 28px;
+      height: 28px;
+      background-color: #0061fe;
+      border-radius: 3px;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .header-nav .globe-icon {
+      width: 28px;
+      height: 28px;
+      border: 2px solid #888;
+      border-radius: 50%;
+      background-color: #eee;
+    }
+
+    .header-nav a {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      background-color: #f5f5f5;
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .btn-primary {
+      padding: 8px 18px;
+      background-color: #0061fe;
+      color: #fff !important;
+      border: none !important;
+      border-radius: 8px !important;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    .hero {
+      display: flex;
+      height: calc(100vh - 68px);
+    }
+
+    /* Coluna esquerda (texto) */
+    .hero-left {
+      flex: 0 0 52%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 64px;
+      background-color: #f7f7f7;
+      border-right: 3px solid #ccc;
+      gap: 20px;
+    }
+
+    .hero-title {
+      width: 100%;
+      height: 160px;
+      background-color: #d0e8ff;
+      border: 2px dashed #0061fe;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #0061fe;
+    }
+
+    .hero-description {
+      width: 100%;
+      height: 80px;
+      background-color: #e8f0fe;
+      border: 2px dashed #6699cc;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .hero-link {
+      width: 260px;
+      height: 42px;
+      background-color: #aad1f0;
+      border: 2px dashed #6699cc;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .btn-hero {
+      width: 320px;
+      height: 52px;
+      background-color: #0061fe;
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Coluna direita (visual/app) */
+    .hero-right {
+      flex: 1;
+      background-color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-right .mockup-window {
+      width: 420px;
+      height: 300px;
+      background-color: #2d2d2d;
+      border: 2px solid #555;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .hero-right .folder-icon {
+      position: absolute;
+      bottom: 120px;
+      left: 40px;
+      width: 60px;
+      height: 50px;
+      background-color: #5ba3dc;
+      border-radius: 4px;
+      opacity: 0.7;
+    }
+
+    .hero-right .mini-card {
+      position: absolute;
+      top: 60px;
+      left: 55px;
+      width: 50px;
+      height: 40px;
+      background-color: #888;
+      border-radius: 4px;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-logo">
+      <div class="logo-icon"></div>
+      Logo
+    </div>
+
+    <nav class="header-nav">
+      <div class="globe-icon" title="Ícone de idioma"></div>
+      <a href="#">Link Nav 1</a>
+      <a href="#">Link Nav 2</a>
+      <a href="#">Entrar</a>
+      <a href="#" class="btn-primary">Começar agora</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+
+      <!-- Coluna esquerda: conteúdo textual -->
+      <div class="hero-left">
+        <div class="hero-title">[ Título principal – H1 ]</div>
+        <div class="hero-description">[ Parágrafo descritivo / subtexto ]</div>
+        <button class="btn-hero">[ Botão CTA principal ]</button>
+        <div class="hero-link">[ Link secundário → ]</div>
+      </div>
+
+      <!-- Coluna direita: visual/mockup do app -->
+      <div class="hero-right">
+        <div class="mini-card"></div>
+        <div class="mockup-window">[ Imagem / Mockup do aplicativo ]</div>
+        <div class="folder-icon"></div>
+      </div>
+
+    </section>
+  </main>
+
+</body>
+</html>

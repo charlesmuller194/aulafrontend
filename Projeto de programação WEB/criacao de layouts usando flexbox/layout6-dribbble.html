@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Layout 6 – Dribbble (Grid)</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+
+    body {
+      background-color: #f8f8f8;
+      color: #111;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────────── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      padding: 0 32px;
+      background-color: #ffffff;
+      border-bottom: 2px solid #eee;
+    }
+
+    .header-logo {
+      width: 100px;
+      height: 36px;
+      background-color: #ffd0dc;
+      border: 2px solid #ea4c89;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #ea4c89;
+      font-size: 13px;
+    }
+
+    /* Campo de busca central */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-bar .input-wrap {
+      display: flex;
+      align-items: center;
+      width: 300px;
+      height: 38px;
+      background-color: #f0f0f0;
+      border: 1.5px solid #ccc;
+      border-radius: 20px;
+      padding: 0 16px;
+      gap: 8px;
+      font-size: 13px;
+      color: #888;
+    }
+
+    .search-bar .btn-shots {
+      height: 38px;
+      padding: 0 16px;
+      background-color: #f0f0f0;
+      border: 1.5px solid #ccc;
+      border-radius: 20px;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .search-bar .btn-search-icon {
+      width: 38px;
+      height: 38px;
+      background-color: #ea4c89;
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Nav links do header */
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-nav a {
+      padding: 6px 14px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #333;
+      font-size: 13px;
+    }
+
+    /* Botões de autenticação */
+    .header-auth {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-link {
+      padding: 6px 14px;
+      background-color: transparent;
+      border: none;
+      font-size: 13px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .btn-dark {
+      padding: 8px 18px;
+      background-color: #0d0c22;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    /* ── SUB-NAV (filtros de categoria) ─────────────────────── */
+    .sub-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 32px;
+      background-color: #ffffff;
+      border-bottom: 2px solid #eee;
+    }
+
+    .sub-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sub-nav-left .filter-pill {
+      padding: 6px 14px;
+      background-color: #eee;
+      border: 1.5px solid #ccc;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #444;
+      cursor: pointer;
+    }
+
+    .sub-nav-left .filter-pill.active {
+      background-color: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    .btn-filters {
+      padding: 6px 16px;
+      background-color: #fff;
+      border: 1.5px solid #bbb;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── MAIN – GRADE DE CARDS ───────────────────────────────── */
+    /* Layout 6 utiliza CSS Grid (4 colunas) */
+    main {
+      padding: 28px 32px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    /* Card individual */
+    .design-card {
+      background-color: #ffffff;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    /* Imagem do design */
+    .design-card .card-image {
+      width: 100%;
+      height: 200px;
+      background-color: #e8e8e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #888;
+      border-bottom: 2px solid #ddd;
+    }
+
+    /* Rodapé do card: autor + stats */
+    .design-card .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+    }
+
+    .card-footer .author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-footer .avatar {
+      width: 26px;
+      height: 26px;
+      background-color: #ccc;
+      border: 2px solid #ea4c89;
+      border-radius: 50%;
+    }
+
+    .card-footer .author-name {
+      font-size: 12px;
+      color: #333;
+    }
+
+    .card-footer .badge {
+      font-size: 10px;
+      background-color: #ffd700;
+      color: #333;
+      border-radius: 3px;
+      padding: 1px 5px;
+    }
+
+    .card-footer .stats {
+      display: flex;
+      gap: 10px;
+      font-size: 11px;
+      color: #888;
+    }
+
+    .stats span {
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      padding: 2px 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-logo">Logo</div>
+
+    <!-- Campo de busca -->
+    <div class="search-bar">
+      <div class="input-wrap">🔍 [ O que você procura? ]</div>
+      <button class="btn-shots">Shots ▾</button>
+      <button class="btn-search-icon">⊕</button>
+    </div>
+
+    <!-- Links de navegação -->
+    <nav class="header-nav">
+      <a href="#">Explorar ▾</a>
+      <a href="#">Contratar ▾</a>
+      <a href="#">Vagas</a>
+      <a href="#">Blog</a>
+    </nav>
+
+    <!-- Autenticação -->
+    <div class="header-auth">
+      <button class="btn-link">Sign up</button>
+      <button class="btn-dark">Log in</button>
+    </div>
+  </header>
+
+  <!-- SUB-NAV: filtros de categoria -->
+  <nav class="sub-nav">
+    <div class="sub-nav-left">
+      <span class="filter-pill active">Popular ▾</span>
+      <span class="filter-pill active">Descobrir</span>
+      <span class="filter-pill">Animação</span>
+      <span class="filter-pill">Branding</span>
+      <span class="filter-pill">Ilustração</span>
+      <span class="filter-pill">Mobile</span>
+      <span class="filter-pill">Design de Produto</span>
+      <span class="filter-pill">Tipografia</span>
+      <span class="filter-pill">Web Design</span>
+    </div>
+    <button class="btn-filters">⚙ Filtros</button>
+  </nav>
+
+  <!-- MAIN: grade de cards (CSS Grid 4 colunas) -->
+  <main>
+    <div class="cards-grid">
+
+      <!-- Linha 1 -->
+      <div class="design-card">
+        <div class="card-image">[ Imagem do design ]</div>
+        <div class="card-footer">
+          <div class="author">
+            <div class="avatar"></div>
+            <span class="author-name">Autor 1</span>
+            <span class="badge">PRO</span>
+          </div>
+          <div class="stats">
+            <span>♥ 90</span>
+            <span>👁 13k</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="design-card">
+        <div class="card-image">[ Imagem do design ]</div>
+        <div class="card-footer">
+          <div class="author">
+            <div class="avatar"></div>
+            <span class="author-name">Autor 2</span>
+            <span class="badge">PRO</span>
+          </div>
+          <div class="stats">
+            <span>♥ 79</span>
+            <span>👁 13k</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="design-card">
+        <div class="card-image">[ Imagem do design ]</div>
+        <div class="card-footer">
+          <div class="author">
+            <div class="avatar"></div>
+            <span class="author-name">Autor 3</span>
+            <span class="badge">PRO</span>
+          </div>
+          <div class="stats">
+            <span>♥ 61</span>
+            <span>👁 6.6k</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="design-card">
+        <div class="card-image">[ Imagem do design ]</div>
+        <div class="card-footer">
+          <div class="author">
+            <div class="avatar"></div>
+            <span class="author-name">Autor 4</span>
+            <span class="badge">PRO</span>
+          </div>
+          <div class="stats">
+            <span>♥ 57</span>
+            <span>👁 5.2k</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linha 2 -->
+      <div class="design-card">
+        <div class="card-image">[ Imagem do design ]</div>
+        <div class="card-footer">
+          <div class="author">
+            <div class="avatar"></div>
+            <span class="author-name">Autor 5</span>
+            <span class="badge">TEAM</span>
+          </div>
+          <div class="stats">
+            <span>♥ 193</span>
+            <span>👁 11.9k</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="design-card">
+        <div class="card-image">[ Imagem do design ]</div>
+        <div class="card-footer">
+          <div class="author">
+            <div class="avatar"></div>
+            <span class="author-name">Autor 6</span>
+            <span class="badge">PRO</span>
+          </div>
+          <div class="stats">
+            <span>♥ 55</span>
+            <span>👁 4k</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="design-card">
+        <div class="card-image">[ Imagem do design ]</div>
+        <div class="card-footer">
+          <div class="author">
+            <div class="avatar"></div>
+            <span class="author-name">Autor 7</span>
+            <span class="badge">TEAM</span>
+          </div>
+          <div class="stats">
+            <span>♥ 47</span>
+            <span>👁 5.9k</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="design-card">
+        <div class="card-image">[ Imagem do design ]</div>
+        <div class="card-footer">
+          <div class="author">
+            <div class="avatar"></div>
+            <span class="author-name">Autor 8</span>
+            <span class="badge">PRO</span>
+          </div>
+          <div class="stats">
+            <span>♥ 44</span>
+            <span>👁 4.1k</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linha 3 (parcial) -->
+      <div class="design-card">
+        <div class="card-image">[ Imagem do design ]</div>
+        <div class="card-footer">
+          <div class="author">
+            <div class="avatar"></div>
+            <span class="author-name">Autor 9</span>
+          </div>
+          <div class="stats"><span>♥ 38</span><span>👁 3.2k</span></div>
+        </div>
+      </div>
+
+      <div class="design-card">
+        <div class="card-image">[ Imagem do design ]</div>
+        <div class="card-footer">
+          <div class="author">
+            <div class="avatar"></div>
+            <span class="author-name">Autor 10</span>
+          </div>
+          <div class="stats"><span>♥ 32</span><span>👁 2.8k</span></div>
+        </div>
+      </div>
+
+      <div class="design-card">
+        <div class="card-image">[ Imagem do design ]</div>
+        <div class="card-footer">
+          <div class="author">
+            <div class="avatar"></div>
+            <span class="author-name">Autor 11</span>
+          </div>
+          <div class="stats"><span>♥ 29</span><span>👁 2.1k</span></div>
+        </div>
+      </div>
+
+      <div class="design-card">
+        <div class="card-image">[ Imagem do design ]</div>
+        <div class="card-footer">
+          <div class="author">
+            <div class="avatar"></div>
+            <span class="author-name">Autor 12</span>
+          </div>
+          <div class="stats"><span>♥ 21</span><span>👁 1.9k</span></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>

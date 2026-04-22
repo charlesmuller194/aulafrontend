@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atividade – Criação de Layouts com Flexbox</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+
+    body {
+      background-color: #f4f4f4;
+      color: #111;
+      padding: 48px 32px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 8px;
+      color: #222;
+    }
+
+    p.desc {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 36px;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 200px;
+      background-color: #fff;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      text-decoration: none;
+      color: #333;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover { border-color: #555; }
+
+    .card .num {
+      font-size: 32px;
+      font-weight: bold;
+      color: #bbb;
+    }
+
+    .card .title {
+      font-size: 15px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    .card .ref {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .card .tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      width: fit-content;
+    }
+
+    .tag-flex { background-color: #d0e8ff; color: #0061fe; border: 1px solid #0061fe; }
+    .tag-grid { background-color: #ffe0cc; color: #cc5500; border: 1px solid #cc5500; }
+  </style>
+</head>
+<body>
+
+  <h1>Criação de Layouts usando Flexbox</h1>
+  <p class="desc">Clique em um layout para visualizar sua estrutura.</p>
+
+  <div class="grid">
+
+    <a class="card" href="layout1-dropbox.html">
+      <span class="num">01</span>
+      <span class="title">Dropbox</span>
+      <span class="ref">Referência: dropbox.com</span>
+      <span class="tag tag-flex">display: flex</span>
+    </a>
+
+    <a class="card" href="layout2-figma.html">
+      <span class="num">02</span>
+      <span class="title">Figma</span>
+      <span class="ref">Referência: figma.com</span>
+      <span class="tag tag-flex">display: flex</span>
+    </a>
+
+    <a class="card" href="layout3-github.html">
+      <span class="num">03</span>
+      <span class="title">GitHub</span>
+      <span class="ref">Referência: github.com</span>
+      <span class="tag tag-flex">display: flex</span>
+    </a>
+
+    <a class="card" href="layout4-netflix.html">
+      <span class="num">04</span>
+      <span class="title">Netflix</span>
+      <span class="ref">Referência: netflix.com</span>
+      <span class="tag tag-flex">display: flex</span>
+    </a>
+
+    <a class="card" href="layout5-noticias.html">
+      <span class="num">05</span>
+      <span class="title">Lista de Notícias</span>
+      <span class="ref">Referência: ge.globo.com</span>
+      <span class="tag tag-flex">display: flex</span>
+    </a>
+
+    <a class="card" href="layout6-dribbble.html">
+      <span class="num">06</span>
+      <span class="title">Dribbble</span>
+      <span class="ref">Referência: dribbble.com</span>
+      <span class="tag tag-grid">display: grid</span>
+    </a>
+
+  </div>
+
+</body>
+</html>
