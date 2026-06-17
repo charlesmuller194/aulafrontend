@@ -118,14 +118,3 @@ não só visual.
 
 > O `.env` já vem com as **chaves de teste do Google** (sempre passam) para
 > rodar localmente. Troque pelas reais antes de publicar.
-
-## 🚀 Deploy — variáveis na Netlify
-
-No painel da Netlify (**Site configuration → Environment variables**), cadastre
-todas as variáveis do `.env` com valores de **produção**:
-
-`SMTP_HOST` · `SMTP_PORT` · `SMTP_SECURE` · `SMTP_USER` · `SMTP_PASS` ·
-`CONTACT_EMAIL` · `ALLOWED_ORIGIN` (= `https://mullertech.netlify.app`) ·
-`VITE_RECAPTCHA_SITE_KEY` · `RECAPTCHA_SECRET`
-
-Depois faça um novo deploy (ou `git push`) para o build pegar as variáveis.
