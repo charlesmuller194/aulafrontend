@@ -1,0 +1,183 @@
+/* ============================================================
+   Müller Tech & Innovation — Design System
+   Tema: dark + verde esmeralda
+   ============================================================ */
+
+/* 1. Reset e ajustes globais ---------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2. Tokens (variáveis CSS) ----------------------------------- */
+:root {
+  /* Fundos e superfícies */
+  --bg-color: #0a0f0d;
+  --bg-elevated: #0c1411;
+  --surface: #111a16;
+  --surface-2: #16221d;
+  --light-gray: #111a16; /* compat: superfície de cartões no tema dark */
+
+  /* Bordas */
+  --border: #1e2d27;
+  --border-strong: #2b3d35;
+
+  /* Marca — verde esmeralda */
+  --primary-color: #2bd576;
+  --primary-strong: #20bd66;
+  --primary-soft: #14241c;
+  --secondary-color: #7be8b0;
+  --glow: rgba(43, 213, 118, 0.35);
+
+  /* Texto */
+  --text-color: #eaf2ee;
+  --second-text-color: #9bb1a8;
+  --third-text-color: #6c8077;
+  --light-text-color: #eaf2ee;
+  --on-primary: #04140c; /* texto sobre fundo verde */
+
+  /* Tipografia */
+  --ff-display: "Space Grotesk", system-ui, sans-serif;
+  --ff-sans: "Inter", system-ui, sans-serif;
+  --fw-base: 400;
+  --fw-md: 500;
+  --fw-semi: 600;
+  --fw-bold: 700;
+
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.25rem;
+
+  /* Espaçamentos */
+  --py-sm: 0.875rem;
+  --py-base: 1rem;
+  --py-lg: 1.5rem;
+  --py-xl: 3rem;
+  --px-lg: 1.5rem;
+
+  /* Raios e sombras */
+  --radius-sm: 0.5rem;
+  --radius: 0.875rem;
+  --radius-lg: 1.5rem;
+  --shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.65);
+  --shadow-glow: 0 0 0 1px var(--border), 0 20px 60px -24px var(--glow);
+}
+
+/* 3. HTML / Body ---------------------------------------------- */
+html {
+  font-family: var(--ff-sans);
+  font-weight: var(--fw-base);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  color: var(--text-color);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-color);
+  overflow-x: hidden;
+  /* Brilho ambiente verde sutil ao fundo de toda a página */
+  background-image:
+    radial-gradient(60rem 40rem at 80% -10%, rgba(43, 213, 118, 0.08), transparent 60%),
+    radial-gradient(50rem 40rem at -10% 20%, rgba(43, 213, 118, 0.05), transparent 55%);
+  background-attachment: fixed;
+}
+
+/* Compensa o header fixo ao navegar pelos links âncora */
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* 4. Títulos --------------------------------------------------- */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--ff-display);
+  line-height: 1.15;
+  color: var(--text-color);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.03em;
+}
+
+h1 {
+  font-size: var(--fs-2xl);
+}
+h2 {
+  font-size: var(--fs-xl);
+}
+h3 {
+  font-size: var(--fs-lg);
+}
+
+/* 5. Links ----------------------------------------------------- */
+a {
+  text-decoration: none;
+  color: var(--second-text-color);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-sm);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-color);
+}
+
+/* 6. Imagens --------------------------------------------------- */
+img,
+svg {
+  max-width: 100%;
+  display: inline-block;
+}
+
+/* 7. Listas ---------------------------------------------------- */
+ul {
+  list-style: none;
+}
+
+/* 8. Acessibilidade ------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--primary-color);
+  color: var(--on-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+
+/* 9. Responsividade — escala maior em desktop ----------------- */
+@media (width >= 1280px) {
+  :root {
+    --fs-lg: 2rem;
+    --fs-xl: 2.625rem;
+    --fs-2xl: 4rem;
+
+    --py-sm: 1rem;
+    --py-base: 1.5rem;
+    --py-lg: 2.5rem;
+    --py-xl: 5rem;
+    --px-lg: 2rem;
+  }
+}

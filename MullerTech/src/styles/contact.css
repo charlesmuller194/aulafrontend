@@ -1,0 +1,173 @@
+#contact {
+  padding-block: 5rem;
+}
+
+.contact-grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+/* Coluna de informações */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 1rem;
+}
+
+.contact-info p {
+  color: var(--second-text-color);
+  max-width: 38ch;
+}
+
+.contact-points {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+  margin-top: 0.75rem;
+}
+
+.contact-points li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--second-text-color);
+  font-size: var(--fs-sm);
+}
+
+.contact-points svg {
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+/* Formulário */
+.contact-form-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field label {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semi);
+  color: var(--text-color);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  background: var(--bg-color);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 0.9rem;
+  color: var(--text-color);
+  font-family: var(--ff-sans);
+  font-size: var(--fs-base);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 7rem;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--third-text-color);
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+.field input[aria-invalid="true"],
+.field textarea[aria-invalid="true"] {
+  border-color: #ff6b6b;
+}
+
+.field-error {
+  color: #ff8a8a;
+  font-size: 0.8rem;
+}
+
+.form-alert {
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.4);
+  color: #ff9b9b;
+  font-size: var(--fs-sm);
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+.contact-note {
+  color: var(--third-text-color);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+/* Honeypot escondido */
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+/* Estado de sucesso */
+.contact-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 1.5rem 0;
+}
+
+.contact-success__icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--primary-soft);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.contact-success p {
+  color: var(--second-text-color);
+  max-width: 36ch;
+}
+
+@media (width >= 980px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1.05fr;
+    align-items: center;
+    gap: 4rem;
+  }
+}
+
+@media (width >= 1280px) {
+  #contact {
+    padding-block: 7rem;
+  }
+}

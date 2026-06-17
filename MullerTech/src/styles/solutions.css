@@ -1,0 +1,100 @@
+#solutions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.5rem;
+  padding-block: 5rem;
+}
+
+/* Cabeçalho de seção (reutilizado em várias seções) */
+.section-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  max-width: 44rem;
+}
+
+.section-head p {
+  color: var(--second-text-color);
+}
+
+.section-head strong {
+  color: var(--primary-color);
+  font-weight: var(--fw-bold);
+}
+
+/* Grade de cartões */
+.cards-grid {
+  width: 100%;
+  gap: 1.5rem;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow);
+}
+
+.card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--radius);
+  background: var(--primary-soft);
+  color: var(--primary-color);
+  border: 1px solid var(--border-strong);
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.card h3 {
+  font-size: 1.3rem;
+}
+
+.card p {
+  color: var(--second-text-color);
+}
+
+/* Barra inferior que cresce no hover */
+.card__detail {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card__detail {
+  transform: scaleX(1);
+}
+
+@media (width >= 1280px) {
+  #solutions {
+    padding-block: 7rem;
+  }
+}

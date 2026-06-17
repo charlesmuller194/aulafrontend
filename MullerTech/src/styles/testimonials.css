@@ -1,0 +1,118 @@
+#testimonials {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding-block: 5rem;
+  overflow: hidden;
+  background: var(--bg-elevated);
+  border-block: 1px solid var(--border);
+}
+
+#testimonials .section-head {
+  padding-inline: var(--px-lg);
+}
+
+/* Pista do carrossel com bordas esmaecidas */
+.carousel {
+  position: relative;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.carousel-content {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  padding-inline: 0.75rem;
+  animation: swipe 40s linear infinite;
+}
+
+.carousel:hover .carousel-content {
+  animation-play-state: paused;
+}
+
+@keyframes swipe {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Cartão de depoimento */
+.testimonial-card {
+  flex-shrink: 0;
+  width: 22rem;
+  max-width: 85vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.testimonial-card__quote {
+  color: var(--text-color);
+  line-height: 1.65;
+}
+
+/* Estrelas */
+.stars {
+  display: flex;
+  gap: 0.15rem;
+  color: var(--primary-color);
+}
+
+.stars .star-empty {
+  color: var(--border-strong);
+}
+
+/* Avatar com iniciais */
+.avatar {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: auto;
+}
+
+.avatar__img {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--ff-display);
+  font-weight: var(--fw-bold);
+  font-size: 0.95rem;
+  color: var(--on-primary);
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+}
+
+.avatar__meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar__name {
+  color: var(--text-color);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-sm);
+}
+
+.avatar__role {
+  color: var(--third-text-color);
+  font-size: 0.8rem;
+}
+
+@media (width >= 1280px) {
+  #testimonials {
+    padding-block: 7rem;
+  }
+}

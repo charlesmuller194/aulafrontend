@@ -1,0 +1,28 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
+.logo__mark {
+  display: inline-flex;
+  filter: drop-shadow(0 6px 16px var(--glow));
+  transition: transform 0.25s ease;
+}
+
+.logo:hover .logo__mark {
+  transform: translateY(-2px) rotate(-3deg);
+}
+
+.logo__wordmark {
+  font-family: var(--ff-display);
+  font-weight: var(--fw-bold);
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+  color: var(--text-color);
+}
+
+.logo__accent {
+  color: var(--primary-color);
+}

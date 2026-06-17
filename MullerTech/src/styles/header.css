@@ -1,0 +1,119 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+/* Fundo translúcido com blur após rolar a página */
+.site-header.scrolled {
+  background: rgba(10, 15, 13, 0.72);
+  backdrop-filter: blur(14px);
+  border-bottom-color: var(--border);
+}
+
+/* Links de navegação (desktop) */
+.nav-links a {
+  position: relative;
+  font-family: var(--ff-sans);
+  font-weight: var(--fw-md);
+  font-size: var(--fs-sm);
+  color: var(--second-text-color);
+  padding-block: 0.25rem;
+}
+
+.nav-links a:hover {
+  color: var(--text-color);
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--primary-color);
+  transition: width 0.25s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Ações à direita */
+.nav-actions {
+  gap: 1.5rem;
+}
+
+.nav-login {
+  color: var(--text-color);
+  font-weight: var(--fw-semi);
+}
+
+.nav-login:hover {
+  color: var(--primary-color);
+}
+
+/* Botão hamburguer (mobile) */
+.mobile-toggle {
+  color: var(--text-color);
+  z-index: 60;
+}
+
+/* Drawer do menu mobile */
+.mobile-menu-content {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 12, 10, 0.97);
+  backdrop-filter: blur(18px);
+  animation: menu-fade 0.25s ease;
+}
+
+.mobile-menu-content ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.25rem;
+  width: 100%;
+}
+
+.mobile-menu-content a {
+  font-family: var(--ff-display);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: var(--text-color);
+}
+
+.mobile-menu-content a:hover {
+  color: var(--primary-color);
+}
+
+.mobile-cta {
+  margin-top: 1rem;
+  width: min(20rem, 80%);
+}
+
+@keyframes menu-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (width >= 1280px) {
+  .mobile-toggle,
+  .mobile-menu-content {
+    display: none;
+  }
+}

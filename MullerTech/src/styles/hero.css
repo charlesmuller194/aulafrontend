@@ -1,0 +1,143 @@
+#hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: 6rem 4.5rem;
+  text-align: center;
+}
+
+/* Grid decorativo desbotando para as bordas */
+#hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  -webkit-mask-image: radial-gradient(60% 55% at 50% 30%, #000 0%, transparent 75%);
+  mask-image: radial-gradient(60% 55% at 50% 30%, #000 0%, transparent 75%);
+  opacity: 0.5;
+}
+
+/* Brilhos verdes ao fundo */
+.hero-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-glow--1 {
+  width: 32rem;
+  height: 32rem;
+  background: rgba(43, 213, 118, 0.16);
+  top: -12rem;
+  right: -10rem;
+}
+
+.hero-glow--2 {
+  width: 26rem;
+  height: 26rem;
+  background: rgba(43, 213, 118, 0.1);
+  bottom: -14rem;
+  left: -10rem;
+}
+
+#hero .content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+/* Pílula da marca */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.95rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--second-text-color);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-md);
+}
+
+.hero-badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  box-shadow: 0 0 12px var(--primary-color);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+#hero h1 {
+  max-width: 18ch;
+}
+
+.hero-sub {
+  color: var(--second-text-color);
+  max-width: 54ch;
+  font-size: 1.0625rem;
+}
+
+.hero-cta {
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+/* Estatísticas */
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem 3rem;
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+  width: min(40rem, 100%);
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.hero-stat__value {
+  font-family: var(--ff-display);
+  font-size: 2rem;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+}
+
+.hero-stat__label {
+  font-size: var(--fs-sm);
+  color: var(--third-text-color);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@media (width >= 1280px) {
+  #hero {
+    padding-block: 8rem 6rem;
+  }
+
+  .hero-stat__value {
+    font-size: 2.5rem;
+  }
+}
