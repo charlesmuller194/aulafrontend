@@ -1,12 +1,14 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import Button from "./Button";
 import { IconArrowRight, IconCheck, IconMail, IconSparkle } from "./icons";
 import "../styles/contact.css";
 
 type Status = "idle" | "loading" | "success" | "error";
-type Errors = Partial<Record<"name" | "email" | "message", string>>;
+type Errors = Partial<Record<"name" | "email" | "message" | "captcha", string>>;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
 const EMPTY = { name: "", email: "", message: "", company: "" };
 
@@ -15,6 +17,10 @@ export default function Contact() {
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  const hasRecaptcha = Boolean(SITE_KEY);
 
   function handleChange(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -23,16 +29,28 @@ export default function Contact() {
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
+  function handleCaptcha(token: string | null) {
+    setCaptchaToken(token);
+    if (token) setErrors((prev) => ({ ...prev, captcha: undefined }));
+  }
+
+  function resetCaptcha() {
+    recaptchaRef.current?.reset();
+    setCaptchaToken(null);
+  }
+
   function validate(): Errors {
     const next: Errors = {};
     if (form.name.trim().length < 2) next.name = "Informe o seu nome.";
     if (!EMAIL_RE.test(form.email)) next.email = "Informe um e-mail válido.";
     if (form.message.trim().length < 10)
       next.message = "Conte um pouco mais (mínimo 10 caracteres).";
+    if (hasRecaptcha && !captchaToken)
+      next.captcha = "Confirme que você não é um robô.";
     return next;
   }
 
-  async function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     // Honeypot: se o campo oculto foi preenchido, é provável que seja um bot.
@@ -53,6 +71,7 @@ export default function Contact() {
           name: form.name,
           email: form.email,
           message: form.message,
+          recaptchaToken: captchaToken,
         }),
       });
 
@@ -63,11 +82,14 @@ export default function Contact() {
 
       setStatus("success");
       setForm(EMPTY);
+      resetCaptcha();
     } catch (error) {
       setErrorMsg(
         error instanceof Error ? error.message : "Erro ao enviar mensagem."
       );
       setStatus("error");
+      // O token é de uso único: força um novo desafio na próxima tentativa.
+      resetCaptcha();
     }
   }
 
@@ -181,6 +203,24 @@ export default function Contact() {
                   </span>
                 )}
               </div>
+
+              {hasRecaptcha && (
+                <div className="field recaptcha-wrap">
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={SITE_KEY}
+                    theme="dark"
+                    onChange={handleCaptcha}
+                    onExpired={() => setCaptchaToken(null)}
+                    onErrored={() => setCaptchaToken(null)}
+                  />
+                  {errors.captcha && (
+                    <span className="field-error" role="alert">
+                      {errors.captcha}
+                    </span>
+                  )}
+                </div>
+              )}
 
               {status === "error" && (
                 <p className="form-alert" role="alert">

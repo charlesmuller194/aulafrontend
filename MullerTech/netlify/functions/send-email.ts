@@ -5,6 +5,31 @@ interface ContactPayload {
   name?: string;
   email: string;
   message: string;
+  recaptchaToken?: string;
+}
+
+// Valida o token do reCAPTCHA junto ao Google. Só roda se o segredo estiver
+// configurado, para não travar ambientes ainda sem a chave.
+async function verifyRecaptcha(token: string | undefined): Promise<boolean> {
+  const secret = process.env.RECAPTCHA_SECRET;
+  if (!secret) {
+    console.warn("RECAPTCHA_SECRET não configurado — pulando verificação.");
+    return true;
+  }
+  if (!token) return false;
+
+  try {
+    const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ secret, response: token }),
+    });
+    const data = (await res.json()) as { success: boolean };
+    return data.success === true;
+  } catch (error) {
+    console.error("Erro ao verificar reCAPTCHA:", error);
+    return false;
+  }
 }
 
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN ?? "";
@@ -50,7 +75,7 @@ const handler: Handler = async (event: HandlerEvent) => {
     };
   }
 
-  const { name, email, message } = payload;
+  const { name, email, message, recaptchaToken } = payload;
 
   if (!email?.trim() || !message?.trim()) {
     return {
@@ -66,6 +91,16 @@ const handler: Handler = async (event: HandlerEvent) => {
       statusCode: 422,
       headers: corsHeaders(origin),
       body: JSON.stringify({ error: "E-mail inválido." }),
+    };
+  }
+
+  // Verificação anti-bot (reCAPTCHA) no servidor
+  const humanVerified = await verifyRecaptcha(recaptchaToken);
+  if (!humanVerified) {
+    return {
+      statusCode: 403,
+      headers: corsHeaders(origin),
+      body: JSON.stringify({ error: "Falha na verificação do reCAPTCHA." }),
     };
   }
 

@@ -117,6 +117,19 @@
   text-align: center;
 }
 
+/* Widget do reCAPTCHA (tema dark) */
+.recaptcha-wrap {
+  align-items: flex-start;
+}
+
+/* Em telas muito estreitas o widget (302px) pode estourar — reduz um pouco. */
+@media (width <= 360px) {
+  .recaptcha-wrap > div {
+    transform: scale(0.9);
+    transform-origin: left top;
+  }
+}
+
 .contact-note {
   color: var(--third-text-color);
   font-size: 0.78rem;
